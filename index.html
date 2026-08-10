@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediQueue — Smart Patient Queue & Medicine Reminder</title>
+  <meta name="description" content="Smart Healthcare System — book appointments, get digital queue tokens, track live queue status, and manage medicine reminders." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="app-header">
+    <div class="brand" onclick="navigate('home')">
+      <div class="logo">🏥</div>
+      <span>MediQueue</span>
+    </div>
+    <div class="nav-actions" id="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <div class="demo-banner">🚀 Demo: Patients register with any email. Doctors use <strong>sarah@hospital.com</strong> / <strong>doctor123</strong></div>
+
+  <div class="container">
+
+    <!-- ================= HOME ================= -->
+    <section id="page-home" class="page active">
+      <div class="hero">
+        <div class="hero-bg-icon l">🏥</div>
+        <div class="hero-bg-icon r">💊</div>
+        <h1>Smart Patient Queue &<br>Medicine Reminder</h1>
+        <p>Book appointments, get instant digital queue tokens, track your live queue position, and never miss a medicine again. A simple, modern healthcare companion for patients and doctors.</p>
+        <div class="flex gap-1 wrap" style="justify-content:center">
+          <button class="btn btn-primary" style="background:#fff;color:var(--primary)" onclick="navigate('patient-register')">I'm a Patient →</button>
+          <button class="btn" style="background:rgba(255,255,255,0.2);color:#fff;border:1.5px solid #fff" onclick="navigate('doctor-login')">I'm a Doctor →</button>
+        </div>
+      </div>
+
+      <div class="grid grid-3 mb-3">
+        <div class="feature-card"><div class="feature-icon">🎫</div><h3>Digital Queue Tokens</h3><p>Get an instant token number when you book. No more paper slips or guessing your turn.</p></div>
+        <div class="feature-card"><div class="feature-icon">📊</div><h3>Live Queue Status</h3><p>See your real-time queue position and estimated wait time, updated automatically.</p></div>
+        <div class="feature-card"><div class="feature-icon">⏰</div><h3>Medicine Reminders</h3><p>Set daily reminders for your medicines so you never miss a dose again.</p></div>
+        <div class="feature-card"><div class="feature-icon">📱</div><h3>QR Code Check-in</h3><p>Every appointment generates a QR token for quick check-in at the clinic.</p></div>
+        <div class="feature-card"><div class="feature-icon">🔔</div><h3>Smart Notifications</h3><p>Get alerted when your consultation starts, is completed, or a prescription is ready.</p></div>
+        <div class="feature-card"><div class="feature-icon">🌙</div><h3>Dark Mode + Responsive</h3><p>Beautiful interface that works on any device, day or night.</p></div>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-bottom:16px">How it works</h2>
+        <div class="grid grid-3">
+          <div><div style="font-size:28px">1️⃣</div><h3 style="margin:6px 0">Register & Book</h3><p class="text-muted">Create a patient account and book an appointment with an available doctor.</p></div>
+          <div><div style="font-size:28px">2️⃣</div><h3 style="margin:6px 0">Get Your Token</h3><p class="text-muted">Receive a digital queue token with a QR code instantly.</p></div>
+          <div><div style="font-size:28px">3️⃣</div><h3 style="margin:6px 0">Track & Remind</h3><p class="text-muted">Watch your live queue position and set medicine reminders after the visit.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PATIENT REGISTER ================= -->
+    <section id="page-patient-register" class="page">
+      <div style="max-width:480px;margin:0 auto">
+        <div class="card">
+          <h2 style="margin-bottom:6px">👤 Patient Registration</h2>
+          <p class="text-muted mb-2">Create your account to book appointments and manage reminders.</p>
+          <form id="form-patient-register">
+            <div class="form-group"><label>Full Name *</label><input name="name" required placeholder="John Doe" /></div>
+            <div class="form-group"><label>Email *</label><input name="email" type="email" required placeholder="you@email.com" /></div>
+            <div class="form-group"><label>Password *</label><input name="password" type="password" required minlength="4" placeholder="••••••••" /></div>
+            <div class="form-group"><label>Phone</label><input name="phone" placeholder="+1 555 123 4567" /></div>
+            <div class="grid grid-2">
+              <div class="form-group"><label>Age</label><input name="age" type="number" min="0" max="120" placeholder="30" /></div>
+              <div class="form-group"><label>Gender</label>
+                <select name="gender"><option value="">—</option><option>Male</option><option>Female</option><option>Other</option></select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+          </form>
+          <p class="text-center mt-2 text-muted">Already have an account? <a href="#" onclick="navigate('patient-login');return false" style="color:var(--primary);font-weight:600">Login</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PATIENT LOGIN ================= -->
+    <section id="page-patient-login" class="page">
+      <div style="max-width:420px;margin:0 auto">
+        <div class="card">
+          <h2 style="margin-bottom:6px">👋 Patient Login</h2>
+          <p class="text-muted mb-2">Welcome back! Please sign in.</p>
+          <form id="form-patient-login">
+            <div class="form-group"><label>Email</label><input name="email" type="email" required placeholder="you@email.com" /></div>
+            <div class="form-group"><label>Password</label><input name="password" type="password" required placeholder="••••••••" /></div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+          </form>
+          <p class="text-center mt-2 text-muted">New here? <a href="#" onclick="navigate('patient-register');return false" style="color:var(--primary);font-weight:600">Register</a></p>
+          <p class="text-center mt-1 text-muted" style="font-size:13px">Demo: register any email, or use <strong>john@test.com / pass123</strong> (after demo seeding)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DOCTOR LOGIN ================= -->
+    <section id="page-doctor-login" class="page">
+      <div style="max-width:420px;margin:0 auto">
+        <div class="card">
+          <h2 style="margin-bottom:6px">🩺 Doctor Login</h2>
+          <p class="text-muted mb-2">Sign in to manage your patient queue.</p>
+          <form id="form-doctor-login">
+            <div class="form-group"><label>Email</label><input name="email" type="email" required placeholder="doctor@hospital.com" /></div>
+            <div class="form-group"><label>Password</label><input name="password" type="password" required placeholder="••••••••" /></div>
+            <button type="submit" class="btn btn-primary btn-block">Login as Doctor</button>
+          </form>
+          <div class="card mt-2" style="background:var(--surface-alt);padding:14px">
+            <p style="font-size:13px;font-weight:700;margin-bottom:6px">🔑 Demo Doctor Accounts (password: <code>doctor123</code>)</p>
+            <p style="font-size:13px" class="text-muted">sarah@hospital.com — General Physician<br>james@hospital.com — Cardiologist<br>emily@hospital.com — Pediatrician</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PATIENT DASHBOARD ================= -->
+    <section id="page-patient-dashboard" class="page">
+      <div class="flex-between wrap mb-3">
+        <h1>👤 Patient Dashboard</h1>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="switchPTab(event,'p-overview')">Overview</button>
+        <button class="tab" onclick="switchPTab(event,'book')">Book Appointment</button>
+        <button class="tab" onclick="switchPTab(event,'queue')">Live Queue</button>
+        <button class="tab" onclick="switchPTab(event,'reminders')">Medicine Reminders</button>
+        <button class="tab" onclick="switchPTab(event,'history')">History</button>
+        <button class="tab" onclick="switchPTab(event,'notifications')">Notifications</button>
+      </div>
+
+      <div id="p-overview" class="ptab">
+        <div class="grid grid-4 mb-3" id="patient-stats"></div>
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-title">📅 Next Appointment</div>
+            <div id="patient-next"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">⚡ Quick Actions</div>
+            <div class="flex gap-1" style="flex-direction:column">
+              <button class="btn btn-primary btn-block" onclick="navigate('book')">🎫 Book New Appointment</button>
+              <button class="btn btn-secondary btn-block" onclick="navigate('queue')">📊 Track Live Queue</button>
+              <button class="btn btn-secondary btn-block" onclick="navigate('reminders')">💊 Set Medicine Reminder</button>
+              <button class="btn btn-secondary btn-block" onclick="navigate('history')">📋 View Appointment History</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="book" class="ptab hidden">
+        <div class="card">
+          <div class="card-title">🎫 Book an Appointment</div>
+          <form id="form-book">
+            <div class="form-group"><label>Appointment Date *</label><input id="book-date" name="date" type="date" required /></div>
+            <div class="form-group"><label>Reason for Visit</label><textarea id="book-reason" name="reason" placeholder="Describe your symptoms briefly (optional)"></textarea></div>
+            <label style="display:block;font-size:14px;font-weight:600;margin-bottom:8px">Choose a Doctor *</label>
+            <div class="grid grid-2 mb-2" id="book-doctors"></div>
+            <button type="submit" class="btn btn-primary btn-block">Book Appointment</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="queue" class="ptab hidden">
+        <div class="card-title">📊 Live Queue Status <span class="text-muted" style="font-size:12px;font-weight:400">(auto-refreshes every 8s)</span></div>
+        <div id="queue-content"></div>
+      </div>
+
+      <div id="reminders" class="ptab hidden">
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-title">💊 Add Medicine Reminder</div>
+            <form id="form-reminder">
+              <div class="form-group"><label>Medicine Name *</label><input name="medicine_name" required placeholder="e.g. Paracetamol" /></div>
+              <div class="form-group"><label>Dosage</label><input name="dosage" placeholder="e.g. 500mg" /></div>
+              <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Reminder Times (set one or more)</label>
+              <div class="grid grid-3 mb-2">
+                <div class="form-group"><input name="t1" type="time" /></div>
+                <div class="form-group"><input name="t2" type="time" /></div>
+                <div class="form-group"><input name="t3" type="time" /></div>
+              </div>
+              <div class="grid grid-2">
+                <div class="form-group"><label>Start Date *</label><input id="reminder-start" name="start_date" type="date" required /></div>
+                <div class="form-group"><label>End Date (optional)</label><input name="end_date" type="date" /></div>
+              </div>
+              <div class="form-group"><label>Notes</label><input name="notes" placeholder="e.g. after meals" /></div>
+              <button type="submit" class="btn btn-primary btn-block">Add Reminder</button>
+            </form>
+          </div>
+          <div>
+            <div class="card-title">⏰ My Reminders</div>
+            <div id="reminders-list" style="display:flex;flex-direction:column;gap:12px"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="history" class="ptab hidden">
+        <div class="card-title">📋 Appointment History</div>
+        <div id="history-list"></div>
+      </div>
+
+      <div id="notifications" class="ptab hidden">
+        <div class="card-title">🔔 Notifications</div>
+        <div id="notif-list" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+    </section>
+
+    <!-- ================= DOCTOR DASHBOARD ================= -->
+    <section id="page-doctor-dashboard" class="page">
+      <div class="flex-between wrap mb-3">
+        <h1>🩺 Doctor Dashboard</h1>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="switchDTab(event,'d-overview')">Overview</button>
+        <button class="tab" onclick="switchDTab(event,'doctor-queue')">Patient Queue</button>
+        <button class="tab" onclick="switchDTab(event,'d-notifications')">Notifications</button>
+      </div>
+
+      <div id="d-overview" class="dtab">
+        <div class="grid grid-4 mb-3" id="doctor-stats"></div>
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-title">📈 Weekly Appointments</div>
+            <div id="doctor-chart"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">📊 Today's Status Distribution</div>
+            <div id="doctor-dist"></div>
+          </div>
+        </div>
+        <div class="card mt-2">
+          <div class="flex-between wrap">
+            <p class="text-muted">Manage today's patient queue — start consultations, mark complete, and add prescriptions.</p>
+            <button class="btn btn-primary" onclick="switchDTab(event,'doctor-queue')">Go to Queue →</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="doctor-queue" class="dtab hidden">
+        <div class="flex-between wrap mb-2">
+          <div class="card-title">👥 Patient Queue <span class="text-muted" style="font-size:12px;font-weight:400">(auto-refreshes every 8s)</span></div>
+          <div class="form-group" style="margin:0"><input id="doctor-queue-date" type="date" onchange="loadDoctorQueue()" /></div>
+        </div>
+        <div id="doctor-queue-list"></div>
+      </div>
+
+      <div id="d-notifications" class="dtab hidden" style="display:none">
+        <div class="card-title">🔔 Notifications</div>
+        <div id="d-notif-list" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <script>
+    // Tab switchers
+    function switchPTab(e, id) {
+      document.querySelectorAll('#page-patient-dashboard .ptab').forEach(t => t.classList.add('hidden'));
+      document.querySelectorAll('#page-patient-dashboard .tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.remove('hidden');
+      e.target.classList.add('active');
+      if (id === 'book') loadBookingPage();
+      if (id === 'queue') loadQueuePage();
+      if (id === 'reminders') loadRemindersPage();
+      if (id === 'history') loadHistoryPage();
+      if (id === 'notifications') loadNotifications();
+    }
+    function switchDTab(e, id) {
+      document.querySelectorAll('#page-doctor-dashboard .dtab').forEach(t => { t.classList.add('hidden'); t.style.display='none'; });
+      document.querySelectorAll('#page-doctor-dashboard .tab').forEach(t => t.classList.remove('active'));
+      const el = document.getElementById(id);
+      el.classList.remove('hidden'); el.style.display='block';
+      e.target.classList.add('active');
+      if (id === 'doctor-queue') loadDoctorQueue();
+      if (id === 'doctor-stats' || id === 'd-overview') loadDoctorStats();
+      if (id === 'd-notifications') loadDoctorNotifications();
+    }
+  </script>
+  <script src="db-local.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
